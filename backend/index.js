@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 4000;
+const PORT = 4001;
 
 app.get('/', (req, res) => {
   res.send('Good job Schnappi! Here is the SweatLog backend!');
@@ -13,7 +13,7 @@ let sportsLogs = [];
 app.post('/api/logs', (req, res) => {
   const {sport, date} = req.body;
   sportsLogs.push({sport, date});
-  res.json({success: true, logs: sportsLogs});
+  res.send(`Saved ${sport} on ${date}! Cool Schnappi!`);
 })
 
 app.get('/api/logs', (req, res) => {

@@ -8,5 +8,11 @@ export default defineConfig({
     host: true,   
     port: 4002,  
     strictPort: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4001', // Backend server
+        changeOrigin: true,
+      },
+    },
   },
 })
