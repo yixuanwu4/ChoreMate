@@ -1,2 +1,2 @@
-# SweatLog
-A application to document sport history from the user. 🏃
+# ChoreMate
+A application to document the invisible housework in daily life.

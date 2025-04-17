@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [sport, setSport] = useState('Running');
+  const [housework, setHousework] = useState('Vacuum Floor');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
@@ -13,7 +13,7 @@ function App() {
       const response = await fetch('/api/logs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({sport, date})
+        body: JSON.stringify({housework, date})
       });
       alert(await response.text());
     } catch (error) {
@@ -55,7 +55,7 @@ function App() {
   const handleEdit = async (id) => {
     const logToEdit = history.find(log => log.id === id);
     if (logToEdit) {
-      setSport(logToEdit.sport);
+      setHousework(logToEdit.housework);
       setDate(logToEdit.date);
       setHistory(prev => prev.filter(log => log.id !== id));
     }
@@ -63,12 +63,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>SweatLog</h1>
+      <h1>ChoreMate</h1>
       <form onSubmit={handleSubmit}>
-        <select value={sport} onChange={(e) => setSport(e.target.value)}>
-          <option value="Running">Running</option>
-          <option value="Belly Training">Belly Training</option>
-          <option value="Yoga">Yoga</option>
+        <select value={housework} onChange={(e) => setHousework(e.target.value)}>
+          <option value="Vacuum Floor">Vacuum Floor</option>
+          <option value="Washing Clothes">Washing Clothes</option>
+          <option value="Folding Clothes">Folding Clothes</option>
         </select>
 
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
@@ -79,14 +79,14 @@ function App() {
         {showHistory && (<table className="log-table" >
           <thead>
             <tr>
-              <th>Sport</th>
+              <th>Housework</th>
               <th>Date</th>
             </tr>
           </thead>
           <tbody>
             {history.map((log, index) => (
               <tr key={index}>
-                <td>{log.sport}</td>
+                <td>{log.housework}</td>
                 <td>{log.date}</td>
                 <td>
                   <button onClick={() => handleEdit(log.id)}>Edit</button>
