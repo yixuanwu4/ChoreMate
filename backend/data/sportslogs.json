@@ -1,14 +1,7 @@
 [
   {
-    "sport": "running",
-    "date": "2025-04-01"
-  },
-  {
-    "sport": "running",
-    "date": "2025-04-02"
-  },
-  {
-    "sport": "running",
-    "date": "2025-04-03"
+    "id": "da9340ae-1ee3-4598-b655-f5a815501f7c",
+    "sport": "Running",
+    "date": "2025-04-17"
   }
 ]
