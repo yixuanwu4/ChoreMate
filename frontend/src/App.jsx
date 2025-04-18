@@ -33,7 +33,7 @@ function App() {
     }
   }
 
-  const handleDelete = async (id, e) => {
+  const handleDelete = async (id) => {
     // e.preventDefault();
 
     try {
@@ -90,7 +90,7 @@ function App() {
                 <td>{log.date}</td>
                 <td>
                   <button onClick={() => handleEdit(log.id)}>Edit</button>
-                  <button type="button" onClick={(e) => handleDelete(log.id, e)}>Delete</button>
+                  <button type="button" onClick={() => handleDelete(log.id)}>Delete</button>
                 </td>
               </tr>
             ))}
