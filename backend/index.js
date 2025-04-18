@@ -46,6 +46,27 @@ app.delete('/api/logs/:id', (req, res) => {
   }
 })
 
+app.patch('/api/logs/:id', (req, res) => {
+  try {
+    const id = req.params.id;
+    const logPaths = path.join(__dirname, '/data/houseworkslogs.json');
+    const currentLogs = JSON.parse(fs.readFileSync(logPaths, 'utf8'));
+
+    const {housework, date} = req.body;
+    const updatedLogs = currentLogs.map(log => {
+      if (String(log.id) === String(id)) {
+        return {...log, housework, date};
+      }
+      return log;
+    });
+    fs.writeFileSync(logPaths, JSON.stringify(updatedLogs, null, 2));
+    res.send(`Updated log with ID ${id}`);
+  } catch (error) {
+    console.error('Error updating log:', error);
+    res.status(500).send('Failed to update log');
+  }
+})
+
 app.get('/api/logs', (req, res) => {
   const logPaths = path.join(__dirname, '/data/houseworkslogs.json');
   const logs = JSON.parse(fs.readFileSync(logPaths, 'utf8'));

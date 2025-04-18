@@ -6,20 +6,9 @@ function App() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try{
-      const response = await fetch('/api/logs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({housework, date})
-      });
-      alert(await response.text());
-    } catch (error) {
-      alert('Failed to save: ' + error);
-    }
-  };
+  const [editId, setEditId] = useState(null);
+  const [editingHousework, setEditingHousework] = useState('');
+  const [editingDate, setEditingDate] = useState('');
 
   const handleShowHistory = async (e) => {
     e.preventDefault();
@@ -52,14 +41,57 @@ function App() {
     }
   }
 
-  const handleEdit = async (id) => {
-    const logToEdit = history.find(log => log.id === id);
-    if (logToEdit) {
-      setHousework(logToEdit.housework);
-      setDate(logToEdit.date);
-      setHistory(prev => prev.filter(log => log.id !== id));
+  const handleSaveEdit = async (id) => {
+    try {
+      const response = await fetch(`/api/logs/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          housework,
+          date
+        })
+      });
+      alert(await response.text());
+      setEditId(null);
+
+      const refreshResponse = await fetch('/api/logs');
+      const data = await refreshResponse.json();
+      setHistory(data.logs);
+  } catch (error) {
+      alert('Failed to save: ' + error);
     }
-  }
+  };
+
+  const handleCancelEdit = () => {
+    setEditId(null);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      if (editId) {
+        const response = await fetch(`/api/logs/${editId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify({housework, date})
+        });
+        alert(await response.text());
+        setEditId(null);
+      } else {
+        const response = await fetch('/api/logs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json'},
+          body: JSON.stringify({housework, date})
+        });
+        alert(await response.text());
+      }
+      const refreshResponse = await fetch('/api/logs');
+      const data = await refreshResponse.json();
+      setHistory(data.logs);
+    } catch (error) {
+      alert('Failed to save: ' + error);
+    }
+  };
 
   return (
     <div className="App">
@@ -86,12 +118,44 @@ function App() {
           <tbody>
             {history.map((log, index) => (
               <tr key={index}>
-                <td>{log.housework}</td>
-                <td>{log.date}</td>
                 <td>
-                  <button onClick={() => handleEdit(log.id)}>Edit</button>
-                  <button type="button" onClick={() => handleDelete(log.id)}>Delete</button>
+                  {editId === log.id ? (
+                    <select value={housework} onChange={(e) => setHousework(e.target.value)}>
+                      <option value="Vacuum Floor">Vacuum Floor</option>
+                      <option value="Washing Clothes">Washing Clothes</option>
+                      <option value="Folding Clothes">Folding Clothes</option>
+                    </select>
+                    ) : (
+                      <span>{log.housework}</span>
+                    )}
                 </td>
+                <td>
+                  {editId === log.id ? (
+                    <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                  ) : (
+                    <span>{log.date}</span>
+                  )}
+                </td>
+                <td>
+                  {editId === log.id ? (
+                    <>
+                    <button type="button" onClick={() => handleSaveEdit(log.id)}>Save</button>
+                    <button type="button" onClick={handleCancelEdit}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button type="button" onClick={() => {
+                        setEditId(log.id);
+                        setEditingHousework(log.housework);
+                        setEditingDate(log.date);
+                      }}>
+                        Edit
+                      </button>
+                      <button type="button" onClick={() => handleDelete(log.id)}>Delete</button>
+                    </>
+                  )}
+                </td>
+                  
               </tr>
             ))}
           </tbody>
