@@ -7,8 +7,6 @@ function App() {
   const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [editId, setEditId] = useState(null);
-  const [editingHousework, setEditingHousework] = useState('');
-  const [editingDate, setEditingDate] = useState('');
 
   const handleShowHistory = async (e) => {
     e.preventDefault();
@@ -146,8 +144,8 @@ function App() {
                     <>
                       <button type="button" onClick={() => {
                         setEditId(log.id);
-                        setEditingHousework(log.housework);
-                        setEditingDate(log.date);
+                        setHousework(log.housework);
+                        setDate(log.date);
                       }}>
                         Edit
                       </button>
