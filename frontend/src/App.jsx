@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+import LogForm from './components/LogForm';
+import HouseworkFields from './components/HouseworkFields';
 
 function App() {
   const [housework, setHousework] = useState('Vacuum Floor');
@@ -64,28 +66,27 @@ function App() {
     setEditId(null);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async ({housework, date, editId}) => {
+    // e.preventDefault();
     try{
       if (editId) {
-        const response = await fetch(`/api/logs/${editId}`, {
+        await fetch(`/api/logs/${editId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify({housework, date})
         });
-        alert(await response.text());
-        setEditId(null);
       } else {
-        const response = await fetch('/api/logs', {
+        await fetch('/api/logs', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify({housework, date})
         });
-        alert(await response.text());
       }
       const refreshResponse = await fetch('/api/logs');
       const data = await refreshResponse.json();
       setHistory(data.logs);
+
+      setEditId(null);
     } catch (error) {
       alert('Failed to save: ' + error);
     }
@@ -94,16 +95,12 @@ function App() {
   return (
     <div className="App">
       <h1>ChoreMate</h1>
-      <form onSubmit={handleSubmit}>
-        <select value={housework} onChange={(e) => setHousework(e.target.value)}>
-          <option value="Vacuum Floor">Vacuum Floor</option>
-          <option value="Washing Clothes">Washing Clothes</option>
-          <option value="Folding Clothes">Folding Clothes</option>
-        </select>
-
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <button type="submit">Save</button>
-      </form>
+      <LogForm
+        onSubmit={handleFormSubmit}
+        defaultHousework={housework} 
+        defaultDate={date}
+        isEditing={!!editId}
+      />
 
       <button type="button" onClick={handleShowHistory}>Show History</button>
         {showHistory && (<table className="log-table" >
@@ -116,24 +113,21 @@ function App() {
           <tbody>
             {history.map((log, index) => (
               <tr key={index}>
-                <td>
-                  {editId === log.id ? (
-                    <select value={housework} onChange={(e) => setHousework(e.target.value)}>
-                      <option value="Vacuum Floor">Vacuum Floor</option>
-                      <option value="Washing Clothes">Washing Clothes</option>
-                      <option value="Folding Clothes">Folding Clothes</option>
-                    </select>
-                    ) : (
+                {editId === log.id ? (
+                  <HouseworkFields housework={housework}
+                    setHousework={setHousework}
+                    date={date}
+                    setDate={setDate}/>
+                ) : (
+                  <>
+                    <td>
                       <span>{log.housework}</span>
-                    )}
-                </td>
-                <td>
-                  {editId === log.id ? (
-                    <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-                  ) : (
-                    <span>{log.date}</span>
-                  )}
-                </td>
+                    </td>
+                    <td>
+                      <span>{log.date}</span>
+                    </td>
+                  </>
+                )}
                 <td>
                   {editId === log.id ? (
                     <>
@@ -153,7 +147,6 @@ function App() {
                     </>
                   )}
                 </td>
-                  
               </tr>
             ))}
           </tbody>

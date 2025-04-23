@@ -1,7 +1,17 @@
 [
   {
     "id": "a37e8ecd-ad4a-4aff-aedd-b2538f404fc0",
-    "housework": "Washing Clothes",
+    "housework": "Folding Clothes",
     "date": "2025-04-01"
+  },
+  {
+    "id": "9518ee72-6832-4a59-8eb4-116257bd3269",
+    "housework": "Vacuum Floor",
+    "date": "2025-04-23"
+  },
+  {
+    "id": "b74f6ca1-4833-4b71-b05e-184b947b7573",
+    "housework": "Vacuum Floor",
+    "date": "2025-04-23"
   }
 ]
