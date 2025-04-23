@@ -2,7 +2,7 @@
   {
     "id": "a37e8ecd-ad4a-4aff-aedd-b2538f404fc0",
     "housework": "Cook",
-    "date": "2025-04-26"
+    "date": "2025-04-03"
   },
   {
     "id": "9518ee72-6832-4a59-8eb4-116257bd3269",
@@ -13,5 +13,10 @@
     "id": "b74f6ca1-4833-4b71-b05e-184b947b7573",
     "housework": "Vacuum Floor",
     "date": "2025-04-23"
+  },
+  {
+    "id": "77cdd03b-d116-47ce-a29c-a6df33c38291",
+    "housework": "Cook",
+    "date": "2025-04-03"
   }
 ]
