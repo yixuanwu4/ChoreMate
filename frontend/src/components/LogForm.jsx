@@ -19,7 +19,7 @@ function LogForm({ onSubmit, defaultHousework = 'Vacuum Floor', defaultDate, isE
   return (
     <form onSubmit={handleSubmit}>
       <HouseworkFields housework={housework} setHousework={setHousework} date={date} setDate={setDate} />
-      <button type="submit">{isEditing ? 'Update' : 'Save'}</button>
+      <button type="submit">Save</button>
     </form>
   );
 }
