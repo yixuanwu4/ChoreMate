@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import LogForm from './components/LogForm';
 import HouseworkFields from './components/HouseworkFields';
+import LogTable from './components/LogTable';
 
 function App() {
   const [housework, setHousework] = useState('Vacuum Floor');
@@ -103,55 +104,24 @@ function App() {
       />
 
       <button type="button" onClick={handleShowHistory}>Show History</button>
-        {showHistory && (<table className="log-table" >
-          <thead>
-            <tr>
-              <th>Housework</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history.map((log, index) => (
-              <tr key={index}>
-                {editId === log.id ? (
-                  <HouseworkFields housework={housework}
-                    setHousework={setHousework}
-                    date={date}
-                    setDate={setDate}/>
-                ) : (
-                  <>
-                    <td>
-                      <span>{log.housework}</span>
-                    </td>
-                    <td>
-                      <span>{log.date}</span>
-                    </td>
-                  </>
-                )}
-                <td>
-                  {editId === log.id ? (
-                    <>
-                    <button type="button" onClick={() => handleSaveEdit(log.id)}>Save</button>
-                    <button type="button" onClick={handleCancelEdit}>Cancel</button>
-                    </>
-                  ) : (
-                    <>
-                      <button type="button" onClick={() => {
-                        setEditId(log.id);
-                        setHousework(log.housework);
-                        setDate(log.date);
-                      }}>
-                        Edit
-                      </button>
-                      <button type="button" onClick={() => handleDelete(log.id)}>Delete</button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      {showHistory && (
+        <LogTable
+          history={history}
+          showHistory={showHistory}
+          editId={editId}
+          date={date}
+          setDate={setDate}
+          housework={housework}
+          setHousework={setHousework}
+          onEdit={(log) => {
+            setEditId(log.id);
+            setHousework(log.housework);
+            setDate(log.date);
+            }}
+            onDelete={handleDelete}
+            onSave={handleSaveEdit}
+            onCancel={handleCancelEdit}
+      /> )}
     </div>
   );
 }
