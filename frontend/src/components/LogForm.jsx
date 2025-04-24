@@ -3,7 +3,7 @@ import HouseworkSelect from "./HouseworkSelect";
 import DateInput from "./DateInput";
 import Person from "./Person";
 
-function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate }) {
+function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate, defaultPerson }) {
   const [housework, setHousework] = useState(defaultHousework);
   const [person, setPerson] = useState("Robin");
   const [date, setDate] = useState(
@@ -12,12 +12,13 @@ function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate }) {
 
   useEffect(() => {
     setHousework(defaultHousework);
+    setPerson(defaultPerson);
     setDate(defaultDate || new Date().toISOString().split("T")[0]);
   }, [defaultHousework, defaultDate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ housework, date });
+    onSubmit({ housework, date, person });
   };
 
   return (

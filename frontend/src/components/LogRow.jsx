@@ -42,10 +42,10 @@ function LogRow({
             <span>{log.housework}</span>
           </td>
           <td>
-            <span>{log.Person}</span>
+            <span>{log.date}</span>
           </td>
           <td>
-            <span>{log.date}</span>
+            <span>{log.person}</span>
           </td>
         </>
       )}

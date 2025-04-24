@@ -1,27 +1,20 @@
 [
   {
-    "id": "b74f6ca1-4833-4b71-b05e-184b947b7573",
-    "housework": "Water Plants",
-    "date": "2025-04-23"
-  },
-  {
-    "id": "77cdd03b-d116-47ce-a29c-a6df33c38291",
-    "housework": "Cook",
-    "date": "2025-04-03"
-  },
-  {
-    "id": "3cede06b-0f6f-4bfc-837b-bc92a4b7aac5",
+    "id": "abe5a0ff-0d1e-43a4-9971-e8d2aeceb3a3",
     "housework": "Vacuum Floor",
-    "date": "2025-04-15"
+    "date": "2025-04-22",
+    "person": "Robin"
   },
   {
-    "id": "b3a0376f-37ae-45e9-bddf-2c440e89b732",
-    "housework": "Vacuum Floor",
-    "date": "2025-04-24"
+    "id": "48d69127-21bc-4753-9e77-dd2213cdd65d",
+    "housework": "Clean Bathroom",
+    "date": "2025-04-22",
+    "person": "Both"
   },
   {
-    "id": "a435af43-23df-4460-b0da-fb2003df1a2d",
-    "housework": "Vacuum Floor",
-    "date": "2025-04-24"
+    "id": "9380aba7-3337-4d1e-9257-4bae0098cde7",
+    "housework": "Folding Clothes",
+    "date": "2025-04-22",
+    "person": "Yixuan"
   }
 ]

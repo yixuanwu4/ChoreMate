@@ -16,9 +16,9 @@ app.post('/api/logs', (req, res) => {
     const logPaths = path.join(__dirname, '/data/houseworkslogs.json');
     const currentLogs = JSON.parse(fs.readFileSync(logPaths, 'utf8'));
 
-    const {housework, date} = req.body;
+    const {housework, date, person} = req.body;
     const id = uuidv4();
-    const newLog = {id, housework, date};
+    const newLog = {id, housework, date, person};
 
     const updatedLogs = [...currentLogs, newLog];
     fs.writeFileSync(path.join(__dirname, '/data/houseworkslogs.json'), JSON.stringify(updatedLogs, null, 2));
@@ -52,10 +52,10 @@ app.patch('/api/logs/:id', (req, res) => {
     const logPaths = path.join(__dirname, '/data/houseworkslogs.json');
     const currentLogs = JSON.parse(fs.readFileSync(logPaths, 'utf8'));
 
-    const {housework, date} = req.body;
+    const {housework, date, person} = req.body;
     const updatedLogs = currentLogs.map(log => {
       if (String(log.id) === String(id)) {
-        return {...log, housework, date};
+        return {...log, housework, date, person};
       }
       return log;
     });
