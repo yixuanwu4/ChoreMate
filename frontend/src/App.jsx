@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
 import LogForm from "./components/LogForm";
-import HouseworkFields from "./components/HouseworkFields";
 import LogTable from "./components/LogTable";
 
 function App() {

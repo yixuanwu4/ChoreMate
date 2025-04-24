@@ -1,4 +1,4 @@
-import HouseworkFields from "./HouseworkFields";
+import LogRow from "./LogRow";
 
 function LogTable({
   history,
@@ -28,52 +28,19 @@ function LogTable({
       </thead>
       <tbody>
         {history.map((log, index) => (
-          <tr key={index}>
-            {editId === log.id ? (
-              <HouseworkFields
-                housework={housework}
-                setHousework={setHousework}
-                date={date}
-                setDate={setDate}
-              />
-            ) : (
-              <>
-                <td>
-                  <span>{log.housework}</span>
-                </td>
-                <td>
-                  <span>{log.date}</span>
-                </td>
-              </>
-            )}
-            <td>
-              {editId === log.id ? (
-                <>
-                  <button type="button" onClick={() => onSave(log.id)}>
-                    Save
-                  </button>
-                  <button type="button" onClick={onCancel}>
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onEdit(log);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button type="button" onClick={() => onDelete(log.id)}>
-                    Delete
-                  </button>
-                </>
-              )}
-            </td>
-          </tr>
-        ))}
+          <LogRow
+      key={index}
+      log={log}
+      isEditing={editId === log.id}
+      housework={housework}
+      setHousework={setHousework}
+      date={date}
+      setDate={setDate}
+      onEdit={onEdit}
+      onDelete={onDelete}
+      onSave={onSave}
+      onCancel={onCancel} />
+              ))}
       </tbody>
     </table>
   );

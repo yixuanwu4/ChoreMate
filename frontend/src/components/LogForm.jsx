@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import HouseworkFields from "./HouseworkFields";
+import HouseworkSelect from "./HouseworkSelect";
+import DateInput from "./DateInput";
 
 function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate }) {
   const [housework, setHousework] = useState(defaultHousework);
@@ -19,12 +20,13 @@ function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <HouseworkFields
-        housework={housework}
-        setHousework={setHousework}
-        date={date}
-        setDate={setDate}
-      />
+      <div>
+        <HouseworkSelect
+          value={housework}
+          onChange={(e) => setHousework(e.target.value)}
+        />
+        <DateInput value={date} onChange={(e) => setDate(e.target.value)} />
+      </div>
       <button type="submit">Save</button>
     </form>
   );
