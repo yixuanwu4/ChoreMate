@@ -1,5 +1,6 @@
 import HouseworkSelect from "./HouseworkSelect";
 import DateInput from "./DateInput";
+import Person from "./Person";
 
 function LogRow({
   log,
@@ -12,6 +13,8 @@ function LogRow({
   setHousework,
   date,
   setDate,
+  person,
+  setPerson
 }) {
   return (
     <tr>
@@ -26,11 +29,20 @@ function LogRow({
           <td>
             <DateInput value={date} onChange={(e) => setDate(e.target.value)} />
           </td>
+          <td>
+            <Person
+              value={person}
+              onChange={(e) => setPerson(e.target.value)}
+            />
+          </td>
         </>
       ) : (
         <>
           <td>
             <span>{log.housework}</span>
+          </td>
+          <td>
+            <span>{log.Person}</span>
           </td>
           <td>
             <span>{log.date}</span>

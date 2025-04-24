@@ -4,6 +4,8 @@ function LogTable({
   history,
   showHistory,
   editId,
+  person,
+  setPerson,
   date,
   setDate,
   housework,
@@ -23,6 +25,7 @@ function LogTable({
         <tr>
           <th>Housework</th>
           <th>Date</th>
+          <th>Person</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -34,6 +37,8 @@ function LogTable({
       isEditing={editId === log.id}
       housework={housework}
       setHousework={setHousework}
+      person={person}
+      setPerson={setPerson}
       date={date}
       setDate={setDate}
       onEdit={onEdit}
