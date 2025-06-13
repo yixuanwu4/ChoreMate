@@ -6,7 +6,7 @@ const path = require('path');
 const {v4: uuidv4} = require('uuid');
 
 app.get('/', (req, res) => {
-  res.send('Good job Schnappi! Here is the ChoreMate backend!');
+  res.send('Here is the ChoreMate backend!');
 });
 
 app.use(express.json());
