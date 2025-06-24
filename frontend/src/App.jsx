@@ -103,7 +103,7 @@ function App() {
         defaultPerson={person}
       />
 
-      <button type="button" onClick={handleShowHistory}>
+      <button class="button" type="button" onClick={handleShowHistory}>
         Show History
       </button>
       {showHistory && (

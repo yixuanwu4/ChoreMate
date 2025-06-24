@@ -22,5 +22,11 @@
     "housework": "Clean Kitchen",
     "date": "2025-06-13",
     "person": "Robin"
+  },
+  {
+    "id": "74a4bfa2-e6ea-40b5-b332-2846de09ec82",
+    "housework": "Folding Clothes",
+    "date": "2025-06-24",
+    "person": "Robin"
   }
 ]

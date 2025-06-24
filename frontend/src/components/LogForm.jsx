@@ -23,7 +23,7 @@ function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate, def
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <div class="form-info">
         <HouseworkSelect
           value={housework}
           onChange={(e) => setHousework(e.target.value)}
@@ -31,7 +31,7 @@ function LogForm({ onSubmit, defaultHousework = "Vacuum Floor", defaultDate, def
         <DateInput value={date} onChange={(e) => setDate(e.target.value)} />
         <Person value={person} onChange={(e) => setPerson(e.target.value)} />
       </div>
-      <button type="submit">Save</button>
+      <button className="button" type="submit">Save</button>
     </form>
   );
 }
